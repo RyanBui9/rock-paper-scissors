@@ -59,7 +59,7 @@ function playGame() {
             })
         );
 
-        const body = document.querySelector("body");
+        const winnerContainer = document.getElementById("winner");
         if (humanScore === 5 || computerScore === 5) {
             const announceWinner = document.createElement("div");
             if (humanScore === computerScore) {
@@ -69,7 +69,7 @@ function playGame() {
             } else {
                 announceWinner.textContent = "Computer wins!";
             }
-            body.appendChild(announceWinner);
+            winnerContainer.replaceWith(announceWinner);
         }
     }
 
