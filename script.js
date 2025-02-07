@@ -22,16 +22,32 @@ function playGame() {
     let computerScore = 0;
 
     function playRound(humanChoice, computerChoice) {
+
         humanChoice = humanChoice.toLowerCase();
         let result = determineWinner(humanChoice, computerChoice);
-        console.log(result);
         if (result.includes("win")) {
             humanScore++;
         } else if (result.includes("lose")) {
             computerScore++;
         }
-        console.log("Human Score: " + humanScore);
-        console.log("Compter Score: " + computerScore);
+
+        const resultsContainer = document.getElementById("result");
+        const currWinner = document.createElement("div");
+        currWinner.id = "result";
+        currWinner.textContent = result;
+        resultsContainer.replaceWith(currWinner);
+
+        const humanContainer = document.getElementById("human");
+        const updatedHumanScore = document.createElement("div");
+        updatedHumanScore.id = humanContainer.id;
+        updatedHumanScore.textContent = "Human Score: " + humanScore;
+        humanContainer.replaceWith(updatedHumanScore);
+
+        const computerContainer = document.getElementById("computer");
+        const updatedComputerScore = document.createElement("div");
+        updatedComputerScore.id = computerContainer.id;
+        updatedComputerScore.textContent = "Computer Score: " + computerScore;
+        computerContainer.replaceWith(updatedComputerScore);
     }
 
     function determineWinner(humanChoice, computerChoice) {
@@ -64,11 +80,12 @@ function playGame() {
         }
     }
 
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            playRound(event.target.textContent, getComputerChoice());
+        });
+    });
 
     if (humanScore === computerScore) {
         console.log("You tied with the computer!")
