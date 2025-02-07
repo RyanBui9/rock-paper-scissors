@@ -21,6 +21,13 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            playRound(event.target.textContent, getComputerChoice());
+        });
+    });
+
     function playRound(humanChoice, computerChoice) {
 
         humanChoice = humanChoice.toLowerCase();
@@ -48,6 +55,19 @@ function playGame() {
         updatedComputerScore.id = computerContainer.id;
         updatedComputerScore.textContent = "Computer Score: " + computerScore;
         computerContainer.replaceWith(updatedComputerScore);
+
+        const body = document.querySelector("body");
+        if (humanScore === 5 || computerScore === 5) {
+            const announceWinner = document.createElement("div");
+            if (humanScore === computerScore) {
+                announceWinner.textContent = "You tied with the computer!";
+            } else if (humanScore > computerScore) {
+                announceWinner.textContent = "Player wins!";
+            } else {
+                announceWinner.textContent = "Computer wins!";
+            }
+            body.appendChild(announceWinner);
+        }
     }
 
     function determineWinner(humanChoice, computerChoice) {
@@ -78,21 +98,6 @@ function playGame() {
                 return "You lose! Rock beats scissors";
             }
         }
-    }
-
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach((button) => {
-        button.addEventListener("click", (event) => {
-            playRound(event.target.textContent, getComputerChoice());
-        });
-    });
-
-    if (humanScore === computerScore) {
-        console.log("You tied with the computer!")
-    } else if (humanScore > computerScore) {
-        console.log("Player wins!");
-    } else {
-        console.log("Computer wins!")
     }
 }
 
