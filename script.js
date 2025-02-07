@@ -38,23 +38,26 @@ function playGame() {
             computerScore++;
         }
 
-        const resultsContainer = document.getElementById("result");
-        const currWinner = document.createElement("div");
-        currWinner.id = "result";
-        currWinner.textContent = result;
-        resultsContainer.replaceWith(currWinner);
+        document.getElementById("result").replaceWith(
+            Object.assign(document.createElement("div"), {
+                id: "result",
+                textContent: result,
+            })
+        );
 
-        const humanContainer = document.getElementById("human");
-        const updatedHumanScore = document.createElement("div");
-        updatedHumanScore.id = humanContainer.id;
-        updatedHumanScore.textContent = "Human Score: " + humanScore;
-        humanContainer.replaceWith(updatedHumanScore);
+        document.getElementById("human").replaceWith(
+            Object.assign(document.createElement("div"), {
+                id: "human",
+                textContent: "Human Score: " + humanScore,
+            })
+        );
 
-        const computerContainer = document.getElementById("computer");
-        const updatedComputerScore = document.createElement("div");
-        updatedComputerScore.id = computerContainer.id;
-        updatedComputerScore.textContent = "Computer Score: " + computerScore;
-        computerContainer.replaceWith(updatedComputerScore);
+        document.getElementById("computer").replaceWith(
+            Object.assign(document.createElement("div"), {
+                id: "computer",
+                textContent: "Computer Score: " + computerScore,
+            })
+        );
 
         const body = document.querySelector("body");
         if (humanScore === 5 || computerScore === 5) {
